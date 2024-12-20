@@ -1,12 +1,28 @@
 {% extends "admin/base.html" %}
 
-{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
-
-{% block branding %}
-<div id="site-name"><a href="{% url 'admin:index' %}">Polls Administration</a></div>
-{% if user.is_anonymous %}
-  {% include "admin/color_theme_toggle.html" %}
-{% endif %}
+{% block title %}
+  {% if subtitle %} 
+    <!-- Если есть подзаголовок, добавляем его перед заголовком -->
+    {{ subtitle }} | 
+  {% endif %}
+  {{ title }} | 
+  <!-- Заголовок страницы, который будет отображен на вкладке браузера -->
+  {{ site_title|default:_('Django site admin') }}
+  <!-- Если site_title не задан, используем 'Django site admin' по умолчанию -->
 {% endblock %}
 
-{% block nav-global %}{% endblock %}
+{% block branding %}
+  <div id="site-name">
+    <!-- Ссылка на главную страницу админки Django с текстом "Polls Administration" -->
+    <a href="{% url 'admin:index' %}">Polls Administration</a>
+  </div>
+  
+  {% if user.is_anonymous %}
+    <!-- Если пользователь не аутентифицирован, показываем кнопку для переключения темы -->
+    {% include "admin/color_theme_toggle.html" %}
+  {% endif %}
+{% endblock %}
+
+{% block nav-global %}
+  <!-- Этот блок можно использовать для добавления дополнительной навигации, но он пуст в этом шаблоне -->
+{% endblock %}
